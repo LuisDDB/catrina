@@ -4,6 +4,13 @@
  */
 package mx.itson.catrina.iu;
 
+import java.io.File;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import mx.itson.catrina.entities.AccountStatement;
+
 /**
  *
  * @author luisd
@@ -36,6 +43,11 @@ public class FormAccount extends javax.swing.JFrame {
         setResizable(false);
 
         btnFile.setText("Selecione...");
+        btnFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFileActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Bell MT", 0, 18)); // NOI18N
         jLabel1.setText("Eliga el archivo a cargar");
@@ -43,6 +55,7 @@ public class FormAccount extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Bell MT", 0, 24)); // NOI18N
         jLabel2.setText("Estado de cuenta");
 
+        jTable1.setForeground(new java.awt.Color(204, 102, 0));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null},
@@ -97,6 +110,25 @@ public class FormAccount extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFileActionPerformed
+        try {
+            JFileChooser jFileChooser = new JFileChooser();
+            jFileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+            if (jFileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION);
+            File file = jFileChooser.getSelectedFile();
+            byte fileByte[] = Files.readAllBytes(file.toPath());
+            String content = new String(fileByte, StandardCharsets.UTF_8);
+            AccountStatement accountStatement = new AccountStatement().deserialize(content);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    ex,
+                    "Algo salio mal!",
+                    JOptionPane.ERROR_MESSAGE
+            );
+        }
+    }//GEN-LAST:event_btnFileActionPerformed
 
     /**
      * @param args the command line arguments

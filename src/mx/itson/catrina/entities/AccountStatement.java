@@ -4,19 +4,40 @@
  */
 package mx.itson.catrina.entities;
 
+import com.google.gson.Gson;
+import java.awt.Dialog;
 import java.util.List;
+import javax.swing.JOptionPane;
+import mx.itson.catrina.iu.FormAccount;
 
 /**
  *
  * @author luisd
  */
-public class Account {
+public class AccountStatement {
 
     private String account;
     private String clabe;
     private String currency;
     private Customer customer;
     private List<Transaction> transactions;
+
+    public AccountStatement deserialize(String json) {
+        AccountStatement accountStatement = new AccountStatement();
+
+        try {
+            accountStatement = new Gson().fromJson(json, AccountStatement.class);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(
+                    null, 
+                    ex,
+                    "Algo salio mal!",
+                    JOptionPane.ERROR_MESSAGE
+            );;
+
+        }
+        return accountStatement;
+    }
 
     /**
      * @return the account

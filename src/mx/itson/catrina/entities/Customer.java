@@ -11,7 +11,7 @@ package mx.itson.catrina.entities;
 public class Customer {
     private String id;
     private String name;
-    private String addres;
+    private String address;
     private String city;
     private String rfc;
     private String zip_code;
@@ -45,17 +45,17 @@ public class Customer {
     }
 
     /**
-     * @return the addres
+     * @return the address
      */
     public String getAddres() {
-        return addres;
+        return address;
     }
 
     /**
-     * @param addres the addres to set
+     * @param addres the address to set
      */
     public void setAddres(String addres) {
-        this.addres = addres;
+        this.address = addres;
     }
 
     /**

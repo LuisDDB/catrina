@@ -4,12 +4,15 @@
  */
 package mx.itson.catrina.enums;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  *
  * @author luisd
  */
 public enum Type {
-    
+    @SerializedName("1")
     DEPOSITS,
+    @SerializedName("2")
     WITHDRAWALS
 }
