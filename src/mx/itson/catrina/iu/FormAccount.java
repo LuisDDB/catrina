@@ -7,7 +7,9 @@ package mx.itson.catrina.iu;
 import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -272,6 +274,7 @@ public class FormAccount extends javax.swing.JFrame {
 
     private void btnFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFileActionPerformed
         DecimalFormat df = new DecimalFormat("00.00");
+        DateFormat datef = new SimpleDateFormat("yy-MM-dd");
         double subTotal = 0;
         double deposits = 0;
         double withdrawals = 0;
@@ -279,6 +282,7 @@ public class FormAccount extends javax.swing.JFrame {
             JFileChooser jFileChooser = new JFileChooser();
             jFileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
             if (jFileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION);
+
             File file = jFileChooser.getSelectedFile();
             byte fileByte[] = Files.readAllBytes(file.toPath());
             String content = new String(fileByte, StandardCharsets.UTF_8);
@@ -292,12 +296,13 @@ public class FormAccount extends javax.swing.JFrame {
                 lblAddress.setText("Dirección: " + accountStatement.getCustomer().getAddres());
                 lblCity.setText(accountStatement.getCustomer().getCity());
                 lblZipCode.setText(accountStatement.getCustomer().getZipCode());
-                
-                //Datos de la cuenta
-                lblAccount.setText("Cuenta: "+accountStatement.getAccount());
-                lblClabe.setText("Clave: "+accountStatement.getClabe());
-                lblCurrency.setText("Divisa: "+accountStatement.getCurrency());
 
+                //Datos de la cuenta
+                lblAccount.setText("Cuenta: " + accountStatement.getAccount());
+                lblClabe.setText("Clave: " + accountStatement.getClabe());
+                lblCurrency.setText("Divisa: " + accountStatement.getCurrency());
+
+                //Datos de las transaciiones
                 DefaultTableModel model = (DefaultTableModel) tblTransactions.getModel();
                 model.setRowCount(0);
                 for (Transaction a : accountStatement.getTransactions()) {
@@ -305,22 +310,21 @@ public class FormAccount extends javax.swing.JFrame {
                         subTotal += a.getAmount();
                         deposits += a.getAmount();
                         model.addRow(new Object[]{
-                            a.getDate(), a.getDescription(), a.getAmount(), "", subTotal
+                            datef.format(a.getDate()), a.getDescription(), df.format(a.getAmount()), "", subTotal
 
                         });
                     } else {
                         subTotal -= a.getAmount();
                         withdrawals += a.getAmount();
                         model.addRow(new Object[]{
-                            a.getDate(), a.getDescription(), "", a.getAmount(), subTotal
+                            datef.format(a.getDate()), a.getDescription(), "", df.format(a.getAmount()), subTotal
                         });
                     }
                 }
-                
-                lblDeposits.setText("Deposito: "+df.format(deposits));
-                lblWithdrawals.setText("Retiros: "+df.format(withdrawals));
-                lblFinalBalance.setText("Total: "+ df.format(subTotal));
-                
+
+                lblDeposits.setText("Deposito: " + df.format(deposits));
+                lblWithdrawals.setText("Retiros: " + df.format(withdrawals));
+                lblFinalBalance.setText("Total: " + df.format(subTotal));
 
             }
 

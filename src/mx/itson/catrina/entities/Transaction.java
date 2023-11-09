@@ -4,6 +4,7 @@
  */
 package mx.itson.catrina.entities;
 
+import java.util.Date;
 import mx.itson.catrina.enums.Type;
 
 /**
@@ -11,7 +12,7 @@ import mx.itson.catrina.enums.Type;
  * @author luisd
  */
 public class Transaction {
-    private String date;
+    private Date date;
     private String description;
     private double amount;
     private Type type;
@@ -19,14 +20,14 @@ public class Transaction {
     /**
      * @return the date
      */
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
     /**
      * @param date the date to set
      */
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
