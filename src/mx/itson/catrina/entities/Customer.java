@@ -4,6 +4,8 @@
  */
 package mx.itson.catrina.entities;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  *
  * @author luisd
@@ -14,7 +16,8 @@ public class Customer {
     private String address;
     private String city;
     private String rfc;
-    private String zip_code;
+    @SerializedName("zip_Code")
+    private String zipCode;
 
     /**
      * @return the id
@@ -87,17 +90,17 @@ public class Customer {
     }
 
     /**
-     * @return the zip_code
+     * @return the zipCode
      */
-    public String getZip_code() {
-        return zip_code;
+    public String getZipCode() {
+        return zipCode;
     }
 
     /**
-     * @param zip_code the zip_code to set
+     * @param zipCode the zipCode to set
      */
-    public void setZip_code(String zip_code) {
-        this.zip_code = zip_code;
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
     }
     
 }

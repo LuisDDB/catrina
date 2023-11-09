@@ -13,7 +13,7 @@ import mx.itson.catrina.enums.Type;
 public class Transaction {
     private String date;
     private String description;
-    private String amount;
+    private double amount;
     private Type type;
 
     /**
@@ -47,14 +47,14 @@ public class Transaction {
     /**
      * @return the amount
      */
-    public String getAmount() {
+    public double getAmount() {
         return amount;
     }
 
     /**
      * @param amount the amount to set
      */
-    public void setAmount(String amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 
