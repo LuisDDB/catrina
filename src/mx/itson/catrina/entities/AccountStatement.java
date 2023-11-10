@@ -5,10 +5,10 @@
 package mx.itson.catrina.entities;
 
 import com.google.gson.Gson;
-import java.awt.Dialog;
+
 import java.util.List;
 import javax.swing.JOptionPane;
-import mx.itson.catrina.iu.FormAccount;
+
 
 /**
  *
@@ -22,6 +22,12 @@ public class AccountStatement {
     private Customer customer;
     private List<Transaction> transactions;
 
+    
+    /**
+     * Este metodo deserializa un String llamado json
+     * @param json el que contiene el JSON
+     * @return un objeto AccountStatement
+     */
     public AccountStatement deserialize(String json) {
         AccountStatement accountStatement = new AccountStatement();
 

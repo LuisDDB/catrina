@@ -86,9 +86,9 @@
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="jScrollPane1" pref="708" max="32767" attributes="0"/>
                   <Component id="jLabel7" max="32767" attributes="0"/>
-                  <Component id="jScrollPane1" pref="683" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="194" max="-2" attributes="0"/>
           </Group>
@@ -124,10 +124,6 @@
                       <Component id="lblWithdrawals" min="-2" pref="34" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="lblFinalBalance" min="-2" pref="34" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
-                      <Component id="jLabel7" min="-2" pref="33" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" pref="160" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -151,9 +147,12 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="lblZipCode" min="-2" pref="34" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
+              <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+              <Component id="jLabel7" min="-2" pref="33" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" pref="160" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -201,7 +200,7 @@
           <Font name="Arial" size="14" style="0"/>
         </Property>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="12">
+          <StringArray count="13">
             <StringItem index="0" value="Enero"/>
             <StringItem index="1" value="Febrero"/>
             <StringItem index="2" value="Marzo"/>
@@ -214,9 +213,14 @@
             <StringItem index="9" value="Octubre"/>
             <StringItem index="10" value="Noviembre"/>
             <StringItem index="11" value="Diciembre"/>
+            <StringItem index="12" value="Todos"/>
           </StringArray>
         </Property>
+        <Property name="selectedIndex" type="int" value="12"/>
       </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cbxMonthItemStateChanged"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
@@ -352,7 +356,7 @@
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
-                <Column maxWidth="80" minWidth="80" prefWidth="-1" resizable="true">
+                <Column maxWidth="90" minWidth="90" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>
                   <Renderer/>
@@ -372,7 +376,7 @@
                   <Editor/>
                   <Renderer/>
                 </Column>
-                <Column maxWidth="100" minWidth="100" prefWidth="-1" resizable="true">
+                <Column maxWidth="120" minWidth="120" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>
                   <Renderer/>

@@ -10,9 +10,11 @@ import java.nio.file.Files;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import mx.itson.catrina.Operation.Operation;
 import mx.itson.catrina.entities.AccountStatement;
 import mx.itson.catrina.entities.Transaction;
 
@@ -84,7 +86,13 @@ public class FormAccount extends javax.swing.JFrame {
         jLabel3.setText("Eliga el mes");
 
         cbxMonth.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        cbxMonth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" }));
+        cbxMonth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre", "Todos" }));
+        cbxMonth.setSelectedIndex(12);
+        cbxMonth.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbxMonthItemStateChanged(evt);
+            }
+        });
 
         lblName.setBackground(new java.awt.Color(255, 204, 0));
         lblName.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -142,16 +150,16 @@ public class FormAccount extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblTransactions);
         if (tblTransactions.getColumnModel().getColumnCount() > 0) {
-            tblTransactions.getColumnModel().getColumn(0).setMinWidth(80);
-            tblTransactions.getColumnModel().getColumn(0).setMaxWidth(80);
+            tblTransactions.getColumnModel().getColumn(0).setMinWidth(90);
+            tblTransactions.getColumnModel().getColumn(0).setMaxWidth(90);
             tblTransactions.getColumnModel().getColumn(1).setMinWidth(300);
             tblTransactions.getColumnModel().getColumn(1).setMaxWidth(300);
             tblTransactions.getColumnModel().getColumn(2).setMinWidth(100);
             tblTransactions.getColumnModel().getColumn(2).setMaxWidth(100);
             tblTransactions.getColumnModel().getColumn(3).setMinWidth(100);
             tblTransactions.getColumnModel().getColumn(3).setMaxWidth(100);
-            tblTransactions.getColumnModel().getColumn(4).setMinWidth(100);
-            tblTransactions.getColumnModel().getColumn(4).setMaxWidth(100);
+            tblTransactions.getColumnModel().getColumn(4).setMinWidth(120);
+            tblTransactions.getColumnModel().getColumn(4).setMaxWidth(120);
         }
 
         jLabel7.setBackground(new java.awt.Color(255, 204, 0));
@@ -212,9 +220,9 @@ public class FormAccount extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 683, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 708, Short.MAX_VALUE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(194, 194, 194))
         );
         layout.setVerticalGroup(
@@ -242,11 +250,7 @@ public class FormAccount extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblWithdrawals, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblFinalBalance, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(81, 81, 81)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblFinalBalance, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -264,8 +268,11 @@ public class FormAccount extends javax.swing.JFrame {
                             .addComponent(lblCity, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblCurrency, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblZipCode, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(lblZipCode, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(51, 51, 51)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -273,8 +280,9 @@ public class FormAccount extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFileActionPerformed
-        DecimalFormat df = new DecimalFormat("00.00");
-        DateFormat datef = new SimpleDateFormat("yy-MM-dd");
+        Operation operation = new Operation();
+        DecimalFormat df = new DecimalFormat("$,#00.00");
+        DateFormat datef = new SimpleDateFormat("yyyy-MM-dd");
         double subTotal = 0;
         double deposits = 0;
         double withdrawals = 0;
@@ -286,7 +294,11 @@ public class FormAccount extends javax.swing.JFrame {
             File file = jFileChooser.getSelectedFile();
             byte fileByte[] = Files.readAllBytes(file.toPath());
             String content = new String(fileByte, StandardCharsets.UTF_8);
-            AccountStatement accountStatement = new AccountStatement().deserialize(content);
+            accountStatement = new AccountStatement().deserialize(content);
+            accountStatement.setTransactions(
+                    operation.bubblesort(
+                            accountStatement.getTransactions(), accountStatement.getTransactions().size()));
+            List<Transaction> transactionByMonth = operation.byMonth(accountStatement.getTransactions(), cbxMonth.getSelectedIndex());
 
             if (accountStatement != null) {
 
@@ -305,19 +317,19 @@ public class FormAccount extends javax.swing.JFrame {
                 //Datos de las transaciiones
                 DefaultTableModel model = (DefaultTableModel) tblTransactions.getModel();
                 model.setRowCount(0);
-                for (Transaction a : accountStatement.getTransactions()) {
+                for (Transaction a : transactionByMonth) {
                     if (a.getType() == a.getType().DEPOSITS) {
                         subTotal += a.getAmount();
                         deposits += a.getAmount();
                         model.addRow(new Object[]{
-                            datef.format(a.getDate()), a.getDescription(), df.format(a.getAmount()), "", subTotal
+                            datef.format(a.getDate()), a.getDescription(), df.format(a.getAmount()), "", df.format(subTotal)
 
                         });
                     } else {
                         subTotal -= a.getAmount();
                         withdrawals += a.getAmount();
                         model.addRow(new Object[]{
-                            datef.format(a.getDate()), a.getDescription(), "", df.format(a.getAmount()), subTotal
+                            datef.format(a.getDate()), a.getDescription(), "", df.format(a.getAmount()), df.format(subTotal)
                         });
                     }
                 }
@@ -337,6 +349,58 @@ public class FormAccount extends javax.swing.JFrame {
             );
         }
     }//GEN-LAST:event_btnFileActionPerformed
+
+    private void cbxMonthItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxMonthItemStateChanged
+        Operation operation = new Operation();
+        DecimalFormat df = new DecimalFormat("$,#00.00");
+        DateFormat datef = new SimpleDateFormat("yyyy-MM-dd");
+        double subTotal = 0;
+        double deposits = 0;
+        double withdrawals = 0;
+
+        
+        
+        if (accountStatement != null) {
+
+            List<Transaction> transactionByMonth = operation.byMonth(accountStatement.getTransactions(), cbxMonth.getSelectedIndex());
+            //Datos del Cliente
+            lblName.setText(accountStatement.getCustomer().getName());
+            lblRfc.setText("RFC: " + accountStatement.getCustomer().getRfc());
+            lblAddress.setText("Dirección: " + accountStatement.getCustomer().getAddres());
+            lblCity.setText(accountStatement.getCustomer().getCity());
+            lblZipCode.setText(accountStatement.getCustomer().getZipCode());
+
+            //Datos de la cuenta
+            lblAccount.setText("Cuenta: " + accountStatement.getAccount());
+            lblClabe.setText("Clave: " + accountStatement.getClabe());
+            lblCurrency.setText("Divisa: " + accountStatement.getCurrency());
+
+            //Datos de las transaciiones
+            DefaultTableModel model = (DefaultTableModel) tblTransactions.getModel();
+            model.setRowCount(0);
+            for (Transaction a : transactionByMonth) {
+                if (a.getType() == a.getType().DEPOSITS) {
+                    subTotal += a.getAmount();
+                    deposits += a.getAmount();
+                    model.addRow(new Object[]{
+                        datef.format(a.getDate()), a.getDescription(), df.format(a.getAmount()), "", df.format(subTotal)
+
+                    });
+                } else {
+                    subTotal -= a.getAmount();
+                    withdrawals += a.getAmount();
+                    model.addRow(new Object[]{
+                        datef.format(a.getDate()), a.getDescription(), "", df.format(a.getAmount()), df.format(subTotal)
+                    });
+                }
+            }
+
+            lblDeposits.setText("Deposito: " + df.format(deposits));
+            lblWithdrawals.setText("Retiros: " + df.format(withdrawals));
+            lblFinalBalance.setText("Total: " + df.format(subTotal));
+
+        }
+    }//GEN-LAST:event_cbxMonthItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -373,6 +437,7 @@ public class FormAccount extends javax.swing.JFrame {
         });
     }
 
+    private AccountStatement accountStatement = new AccountStatement();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFile;
     private javax.swing.JComboBox<String> cbxMonth;
